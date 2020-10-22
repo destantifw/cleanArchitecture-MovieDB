@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <androidx.core.widget.NestedScrollView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="WebViewLayout">
+
+            <WebView
+                android:id="@+id/trailerWebView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+            </WebView>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/movieTitleContainer"
+                android:background="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tfMovieTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:lines="2"
+                    android:text="Cobaaaaa"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/genreList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:lines="2"
+                    android:text="Genre"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"/>
+
+<!--                <view class="androidx.appcompat.app.AlertController$RecycleListView"-->
+<!--                    android:id="@+id/rvGenreMovies"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                </view>-->
+
+                <LinearLayout
+                    android:id="@+id/ratingContainerView"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icStar"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@mipmap/icon_star"
+                        android:scaleType="fitXY"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvRateAvg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginEnd="5dp"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white"
+                        android:text="4.5"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvRateCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginEnd="5dp"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/white"
+                        android:text="(2000)"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical"
+                android:background="@color/colorPrimaryDark">
+
+                <TextView
+                    android:id="@+id/tvOverview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="30"
+                    android:text="Overview"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"/>
+
+
+                <TextView
+                    android:id="@+id/tvCompanies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="30"
+                    android:text="Overview"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tvCountries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="30"
+                    android:text="Overview"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tvLanguages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="30"
+                    android:text="Overview"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"/>
+        </LinearLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:textColor="@android:color/white"
+                    android:text="User Reviews"/>
+
+                <View
+                    android:id="@+id/border"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"
+                    />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvUserReviews"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_height="wrap_content"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

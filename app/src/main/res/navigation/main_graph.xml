@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.destanti.MovieDB.ui.MainFragment"
+        android:label="MovieDB"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_DetailFragment"
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+
+            <argument
+                android:name="moviedetail"
+                app:argType="com.destanti.MovieDB.data.Model.MovieListResult"
+                app:nullable="false" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.destanti.MovieDB.ui.MovieDetail.MovieDetailFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_movie_detail">
+
+        <argument
+            android:name="moviedetail"
+            app:argType="com.destanti.MovieDB.data.Model.MovieListResult"
+            app:nullable="false" />
+    </fragment>
+
+</navigation>
