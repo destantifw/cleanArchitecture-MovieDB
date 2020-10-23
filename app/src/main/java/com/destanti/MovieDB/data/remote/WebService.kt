@@ -1,9 +1,6 @@
 package com.destanti.MovieDB.data.remote
 
-import com.destanti.MovieDB.data.Model.MovieDetailModel
-import com.destanti.MovieDB.data.Model.MovieList
-import com.destanti.MovieDB.data.Model.ReviewModel
-import com.destanti.MovieDB.data.Model.VideoDetail
+import com.destanti.MovieDB.data.Model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -21,6 +18,10 @@ interface WebService {
 
     @GET("discover/movie")
     suspend fun getMovieListByGenre(@Query("api_key") apiKey: String, @Query("with_genres") genreId: Int,  @Query("page") page: Int): MovieList?
+
+
+    @GET("genre/movie/list")
+    suspend fun getGenreList(@Query("api_key") apiKey: String): Genres?
 
 
 }

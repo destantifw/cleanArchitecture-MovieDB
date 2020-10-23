@@ -2,9 +2,7 @@ package com.destanti.MovieDB.domain
 
 import androidx.lifecycle.LiveData
 import com.destanti.MovieDB.core.Resource
-import com.destanti.MovieDB.data.Model.MovieEntity
-import com.destanti.MovieDB.data.Model.MovieListResult
-import com.destanti.MovieDB.data.Model.asMovieEntity
+import com.destanti.MovieDB.data.Model.*
 import com.destanti.MovieDB.data.remote.NetworkDataSource
 import com.g.tragosapp.data.local.LocalDataSource
 import dagger.hilt.android.scopes.ActivityRetainedScoped
@@ -27,8 +25,6 @@ class DefaultMovieRepository @Inject constructor(
 
     override suspend fun getMovieList(page: Int): Flow<Resource<List<MovieListResult>>> =
         callbackFlow {
-
-//            offer(getCachedAllMovies())
 
             networkDataSource.getMovieList(80, page).collect{
                 when(it){
@@ -60,4 +56,26 @@ class DefaultMovieRepository @Inject constructor(
     }
 
 
+    override suspend fun saveGenre(genre: GenreEntity) {
+        localDataSource.saveGenre(genre)
+    }
+
+    override suspend fun getGenreList(): Flow<Resource<List<Genre>>> = callbackFlow{
+        networkDataSource.getGenreList().collect {
+            when(it) {
+                is Resource.Success -> {
+                    for (genre in it.data){
+                        saveGenre(genre.asGenreEntity())
+                    }
+                    offer(getCachedGenreList())
+                }
+            }
+            awaitClose{cancel()}
+        }
+    }
+
+
+    override suspend fun getCachedGenreList(): Resource<List<Genre>> {
+        return localDataSource.getCachedGenres()
+    }
 }

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.destanti.MovieDB.R
 import com.destanti.MovieDB.core.Resource
+import com.destanti.MovieDB.data.Model.Genre
+import com.destanti.MovieDB.data.Model.Genres
 import com.destanti.MovieDB.data.Model.MovieListResult
 import com.destanti.MovieDB.databinding.FragmentMainBinding
 import com.destanti.MovieDB.utils.hide
@@ -27,6 +29,7 @@ class MainFragment : Fragment(R.layout.fragment_main),
     lateinit var layoutManager: GridLayoutManager
     private lateinit var binding: FragmentMainBinding
     var page = 1
+    lateinit var genreList:Genres
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +53,28 @@ class MainFragment : Fragment(R.layout.fragment_main),
         )
         binding.rvMovieList.adapter = mainAdapter
 
-        getData()
+        viewModel.getGenreList().observe(viewLifecycleOwner) { result ->
+//            binding.progressBar.showIf { result is Resource.Loading }
+
+            when (result) {
+                is Resource.Loading -> {
+//                    binding.progressBar.show()
+                }
+                is Resource.Success -> {
+                    if (result.data.isEmpty()) {
+//                        binding.progressBar.hide()
+                        return@observe
+                    }
+                    genreList = Genres(result.data)
+                    getData()
+                }
+                is Resource.Failure -> {
+                    showToast("${result.exception}")
+                }
+            }
+        }
+
+//        getData()
 
         binding.rvMovieList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -62,17 +86,17 @@ class MainFragment : Fragment(R.layout.fragment_main),
             }
         })
 
-//        binding.buttonGenre.setOnClickListener({
-//            findNavController().navigate(
-//                MainFragmentDirections.actionMainFragmentToGenreList()
-//            )
-//        })
+        binding.buttonGenre.setOnClickListener({
+            findNavController().navigate(
+                MainFragmentDirections.actionMainFragmentToGenreList(genreList)
+            )
+        })
 
 
     }
 
     fun getData(){
-        viewModel.fetchCocktailList.observe(viewLifecycleOwner) { result ->
+        viewModel.fetchMovieList.observe(viewLifecycleOwner) { result ->
             binding.progressBar.showIf { result is Resource.Loading }
 
             when (result) {
@@ -84,7 +108,7 @@ class MainFragment : Fragment(R.layout.fragment_main),
                         binding.progressBar.hide()
                         return@observe
                     }
-                    page+=1
+                    page += 1
                     mainAdapter.setMovielList(result.data)
                     mainAdapter.notifyDataSetChanged()
                     binding.progressBar.hide()

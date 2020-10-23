@@ -2,6 +2,9 @@ package com.destanti.MovieDB.data.Model
 
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import kotlinx.serialization.Serializable
@@ -62,18 +65,6 @@ data class MovieDetailModel (
     val voteCount: Int
 )
 
-@Parcelize
-data class Genres (
-    val id: Long,
-    val genres: List<Genre>
-) : Parcelable
-
-@Parcelize
-data class Genre (
-    val id: Long,
-    val name: String
-) : Parcelable
-
 data class ProductionCompany (
     val id: Long,
 
@@ -100,3 +91,31 @@ data class SpokenLanguage (
     val name: String
 )
 
+@Parcelize
+data class Genres (
+    val genres: List<Genre>
+) : Parcelable
+
+@Parcelize
+data class Genre (
+    val genreId: Int?,
+    val id: Long,
+    val name: String
+) : Parcelable
+
+@Entity(tableName = "genreListTable")
+data class GenreEntity(
+    @PrimaryKey(autoGenerate = true)
+    val genreId: Int,
+    @ColumnInfo(name = "id")
+    val id: Long,
+    @ColumnInfo(name = "name")
+    val name: String
+)
+
+
+fun List<GenreEntity>.asGenreList(): List<Genre> = this.map {
+    Genre(it.genreId, it.id, it.name)
+}
+
+fun Genre.asGenreEntity(): GenreEntity =  GenreEntity(0,this.id, this.name)

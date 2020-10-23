@@ -21,6 +21,15 @@ class LocalDataSource @Inject constructor(private val movieDao: MovieDao) {
         movieDao.saveMovie(movie)
     }
 
+    suspend fun saveGenre(genre: GenreEntity) {
+        movieDao.saveGenre(genre)
+    }
+
+    suspend fun getCachedGenres(): Resource<List<Genre>> {
+        return Resource.Success(movieDao.getGenreList().asGenreList())
+    }
+
+
     suspend fun getCachedMoviesByGenre(genreId: Int): Resource<List<MovieListResult>> {
         return Resource.Success(movieDao.getMovieByGenre().asMovieList())
     }

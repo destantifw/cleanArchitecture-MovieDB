@@ -2,6 +2,7 @@ package com.destanti.MovieDB.data.remote
 
 import com.destanti.MovieDB.application.injection.AppConstants
 import com.destanti.MovieDB.core.Resource
+import com.destanti.MovieDB.data.Model.Genre
 import com.destanti.MovieDB.data.Model.MovieListResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -18,6 +19,17 @@ class NetworkDataSource @Inject constructor(
             offer(
                 Resource.Success(
                     webService.getMovieListByGenre(AppConstants.API_KEY,80,page)?.results ?: listOf()
+                )
+            )
+            awaitClose { close() }
+        }
+
+
+    suspend fun getGenreList(): Flow<Resource<List<Genre>>> =
+        callbackFlow {
+            offer(
+                Resource.Success(
+                    webService.getGenreList(AppConstants.API_KEY)?.genres ?: listOf()
                 )
             )
             awaitClose { close() }
