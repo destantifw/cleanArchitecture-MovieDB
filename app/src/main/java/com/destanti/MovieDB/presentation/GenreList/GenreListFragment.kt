@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.destanti.MovieDB.R
 import com.destanti.MovieDB.data.Model.Genre
+import com.destanti.MovieDB.data.Model.Genres
+import com.destanti.MovieDB.data.Model.MovieListResult
 import com.destanti.MovieDB.databinding.FragmentGenreBinding
+import com.destanti.MovieDB.presentation.MovieDetail.MovieDetailFragmentArgs
 
 class GenreListFragment : Fragment(R.layout.fragment_genre),
     GenreListAdapter.OnGenreClickListener {
@@ -16,11 +19,19 @@ class GenreListFragment : Fragment(R.layout.fragment_genre),
     private lateinit var binding: FragmentGenreBinding
     var page = 1
 
+    private lateinit var genres: List<Genre>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
         adapter = GenreListAdapter(requireContext(), this)
+        requireArguments().let {
+            GenreListFragmentArgs.fromBundle(it).also { args ->
+                genres = args.genreList.genres
+            }
+        }
+        adapter.setGenreList(genres)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

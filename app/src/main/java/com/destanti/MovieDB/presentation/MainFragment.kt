@@ -69,7 +69,7 @@ class MainFragment : Fragment(R.layout.fragment_main),
                     getData()
                 }
                 is Resource.Failure -> {
-                    showToast("${result.exception}")
+//                    showToast("${result.exception}")
                 }
             }
         }
