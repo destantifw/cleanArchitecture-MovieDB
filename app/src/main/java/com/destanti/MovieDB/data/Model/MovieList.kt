@@ -21,6 +21,7 @@ data class MovieList (
 
 @Parcelize
 data class MovieListResult (
+    val movieId: Int?,
     @SerializedName("poster_path")
     val posterPath: String,
 
@@ -57,7 +58,9 @@ data class MovieListResult (
 
 @Entity(tableName = "movieListTable")
 data class MovieEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    val movieId: Int,
+    @ColumnInfo(name = "id")
     val id: Int,
     @ColumnInfo(name = "poster_path")
     val posterPath: String,
@@ -87,11 +90,11 @@ data class MovieEntity(
 
 
 fun List<MovieEntity>.asMovieList(): List<MovieListResult> = this.map {
-    MovieListResult(it.posterPath, it.adult, it.overview, it.releaseDate, it.id, it.originalTitle,
+    MovieListResult(it.movieId, it.posterPath, it.adult, it.overview, it.releaseDate, it.id, it.originalTitle,
         it.originalLanguage, it.title, it.backdropPath, it.popularity, it.voteCount, it.video, it.voteAverage)
 }
 
 
 fun MovieListResult.asMovieEntity(): MovieEntity =
-    MovieEntity(this.id, this.posterPath, this.adult, this.overview, this.releaseDate, this.originalTitle, this.originalLanguage,
+    MovieEntity(0,this.id, this.posterPath, this.adult, this.overview, this.releaseDate, this.originalTitle, this.originalLanguage,
     this.title, this.backdropPath, this.popularity, this.voteCount, this.video, this.voteAverage)

@@ -25,12 +25,12 @@ class DefaultMovieRepository @Inject constructor(
     private val localDataSource: LocalDataSource
 ) : MovieRepository {
 
-    override suspend fun getMovieList(): Flow<Resource<List<MovieListResult>>> =
+    override suspend fun getMovieList(page: Int): Flow<Resource<List<MovieListResult>>> =
         callbackFlow {
 
-            offer(getCachedAllMovies())
+//            offer(getCachedAllMovies())
 
-            networkDataSource.getMovieList().collect{
+            networkDataSource.getMovieList(80, page).collect{
                 when(it){
                     is Resource.Success -> {
                         for (movie in it.data) {
@@ -39,7 +39,7 @@ class DefaultMovieRepository @Inject constructor(
                         offer(getCachedAllMovies())
                     }
                     is Resource.Failure -> {
-//                        offer(getCachedCocktails(cocktailName))
+
                     }
                 }
             }

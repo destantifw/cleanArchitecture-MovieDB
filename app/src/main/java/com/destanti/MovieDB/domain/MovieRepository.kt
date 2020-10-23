@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
 
-    suspend fun getMovieList(): Flow<Resource<List<MovieListResult>>>
+    suspend fun getMovieList(page: Int): Flow<Resource<List<MovieListResult>>>
     suspend fun saveMovie(movie: MovieEntity)
     suspend fun getCachedMoviesByGenre(genreId: Int): Resource<List<MovieListResult>>
     suspend fun getCachedAllMovies(): Resource<List<MovieListResult>>

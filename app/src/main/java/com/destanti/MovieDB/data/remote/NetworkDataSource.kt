@@ -13,11 +13,11 @@ import javax.inject.Inject
 class NetworkDataSource @Inject constructor(
     private val webService: WebService
 ) {
-    suspend fun getMovieList(): Flow<Resource<List<MovieListResult>>> =
+    suspend fun getMovieList(genreId:Int, page:Int): Flow<Resource<List<MovieListResult>>> =
         callbackFlow {
             offer(
                 Resource.Success(
-                    webService.getMovieListByGenre(AppConstants.API_KEY,80,1)?.results ?: listOf()
+                    webService.getMovieListByGenre(AppConstants.API_KEY,80,page)?.results ?: listOf()
                 )
             )
             awaitClose { close() }

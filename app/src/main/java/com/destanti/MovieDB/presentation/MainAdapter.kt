@@ -1,13 +1,11 @@
-package com.g.tragosapp.ui
+package com.destanti.MovieDB.presentation
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.DiffResult.NO_POSITION
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.destanti.MovieDB.R
 import com.destanti.MovieDB.core.BaseViewHolder
 import com.destanti.MovieDB.data.Model.MovieListResult
 import com.destanti.MovieDB.databinding.ItemMovieListBinding
@@ -37,6 +35,8 @@ class MainAdapter(
             val position = holder.adapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
             itemClickListener.onMovieClick(movieList[position], position)
         }
+
+
 
         return holder
     }

@@ -1,36 +1,35 @@
-package com.destanti.MovieDB.presentation
+package com.destanti.MovieDB.presentation.MovieDetail
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.destanti.MovieDB.application.ToastHelper
 import com.destanti.MovieDB.core.Resource
-import com.destanti.MovieDB.domain.MovieRepository
+import com.destanti.MovieDB.domain.MovieDetail.MovieDetailRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 
-
-class MainViewModel @ViewModelInject constructor(
-    private val repository: MovieRepository,
+class MovieDetailViewModel @ViewModelInject constructor(
+    private val repository: MovieDetailRepository,
     private val toastHelper: ToastHelper,
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val currentMoviePage = savedStateHandle.getLiveData<Int>("page", 1)
+    private val currentMovieId = savedStateHandle.getLiveData<Int>("movieId", 0)
 
-    fun setPage(page: Int) {
-        currentMoviePage.value = page
+    fun setMovieId(movieId: Int) {
+        currentMovieId.value = movieId
     }
 
-    val fetchCocktailList = currentMoviePage.distinctUntilChanged().switchMap { page ->
+    val fetchVideoList = currentMovieId.distinctUntilChanged().switchMap { movieId ->
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try {
-                repository.getMovieList(page).collect {
+                repository.getVideoList(movieId).collect{
                     emit(it)
                 }
             } catch (e: Exception) {
-               // emit(Resource.Failure(e))
+                // emit(Resource.Failure(e))
             }
         }
     }

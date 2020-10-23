@@ -14,7 +14,7 @@ interface WebService {
     fun getMovieDetail(@Path("movieId") movieId: Int, @Query("api_key") apiKey: String): Call<MovieDetailModel>
 
     @GET("movie/{movieId}/videos")
-    fun getVideoDetail(@Path("movieId") movieId: Int, @Query("api_key") apiKey: String): Call<VideoDetail>
+    suspend fun getVideoDetail(@Path("movieId") movieId: Int, @Query("api_key") apiKey: String): VideoDetail?
 
     @GET("movie/{movieId}/reviews")
     fun getUserReviewList(@Path("movieId") movieId: Int, @Query("api_key") apiKey: String): Call<ReviewModel>

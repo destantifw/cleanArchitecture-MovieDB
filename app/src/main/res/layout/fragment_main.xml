@@ -4,7 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainFragment">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".presentation.MainFragment">
+
+    <Button
+        android:id="@+id/buttonGenre"
+        android:drawableRight="@drawable/bottom_triangle"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
+        android:text="Genre"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rvMovieList"
+        android:layout_marginBottom="6dp"
+
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:background="@color/colorPrimary"
@@ -14,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@id/rvMovieList"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/buttonGenre"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

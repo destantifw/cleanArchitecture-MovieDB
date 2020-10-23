@@ -1,7 +1,10 @@
 package com.destanti.MovieDB.data.Model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.serialization.Serializable
 
 data class MovieDetailModel (
     val adult: Boolean,
@@ -59,10 +62,17 @@ data class MovieDetailModel (
     val voteCount: Int
 )
 
+@Parcelize
+data class Genres (
+    val id: Long,
+    val genres: List<Genre>
+) : Parcelable
+
+@Parcelize
 data class Genre (
     val id: Long,
     val name: String
-)
+) : Parcelable
 
 data class ProductionCompany (
     val id: Long,

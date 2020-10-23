@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.destanti.MovieDB.ui.MainFragment"
+        android:name="com.destanti.MovieDB.presentation.MainFragment"
         android:label="MovieDB"
         tools:layout="@layout/fragment_main">
         <action
@@ -23,10 +23,23 @@
                 app:argType="com.destanti.MovieDB.data.Model.MovieListResult"
                 app:nullable="false" />
         </action>
+        <action
+            android:id="@+id/action_mainFragment_to_GenreList"
+            app:destination="@id/genreListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+
+            <argument
+                android:name="genreList"
+                app:argType="com.destanti.MovieDB.data.Model.Genres"
+                app:nullable="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.destanti.MovieDB.ui.MovieDetail.MovieDetailFragment"
+        android:name="com.destanti.MovieDB.presentation.MovieDetail.MovieDetailFragment"
         android:label="Details"
         tools:layout="@layout/fragment_movie_detail">
 
@@ -35,5 +48,17 @@
             app:argType="com.destanti.MovieDB.data.Model.MovieListResult"
             app:nullable="false" />
     </fragment>
+    <fragment
+        android:id="@+id/genreListFragment"
+        android:name="com.destanti.MovieDB.presentation.GenreList.GenreListFragment"
+        android:label=""
+        tools:layout="@layout/fragment_genre">
+
+        <argument
+            android:name="genreList"
+            app:argType="com.destanti.MovieDB.data.Model.Genres"
+            app:nullable="false" />
+    </fragment>
+
 
 </navigation>
